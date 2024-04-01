@@ -8,31 +8,37 @@
          * Random Password Generator
          * 참고 : https://dev.to/code_mystery/random-password-generator-using-javascript-6a
          */
-        var password=document.getElementById("password");
+        // const password = document.getElementById("password");
 
         function genPassword() {
-            var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            let passwordLength = 12;
+            const chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            let passwordLength = 30;
             let password = "";
             for (let i = 0; i <= passwordLength; i++) { // 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
-                var randomNumber = Math.floor(Math.random() * chars.length);
-                password += chars.substring(randomNumber, randomNumber +1);
+                let randomNumber = Math.floor(Math.random() * chars.length); // 0 ~ 50
+                password += chars.substring(randomNumber, randomNumber + 1);
 
             }
             document.getElementById("password").value = password;
         }
 
         function copyPassword() {
-            var copyText = document.getElementById("password");
+            let copyText = document.getElementById("password");
             copyText.select();
             document.execCommand("copy");
+            alert('생성된 비밀번호가 클립보드에 복사 되었습니다.')
         }
     </script>
     <style>
+        @font-face {
+            font-family: 'IBM_Bold';
+            src: url('main/fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf') format('truetype');
+        }
+
         * {
             margin: 0;
             padding: 0;
-            user-select: none;
+            user-select: none; /* 사용자의 입력을 막음 */
             box-sizing: border-box;
         }
 
@@ -44,36 +50,44 @@
             min-height: 100vh;
         }
 
-        .box{
-            background-color: white;
-            padding-top: 30px;
+        .box {
+            background: #e9d4f2;
             padding: 30px;
+            border-radius: 14px;
 
+            /* 추가 */
+            box-shadow: 5px 5px 5px #c6b4ce,
+            -5px -5px 20px #fff4ff;
+            position: relative;
         }
-        .box h2{
+
+
+        .box h2 {
             margin-bottom: 40px;
             text-align: center;
             font-size: 26px;
             color: #015a96;
-            font-family: sans-serif;
+            font-family: IBM_Bold, sans-serif;
         }
+
         input {
             padding: 20px;
-            user-select: none;
             height: 50px;
             width: 400px;
-            border-radius: 6px;
+            border-radius: 14px;
             border: 2px solid #8d0cf7;
             outline: none;
             font-size: 22px;
         }
 
-        input::placeholder{
+        input::placeholder {
             font-size: 23px;
+            font-family: IBM_Bold, sans-serif;
         }
-        #button {
-            font-family: sans-serif;
-            font-size: 15px;
+
+        #button1, #button2 {
+            font-family: IBM_Bold, sans-serif;
+            font-size: 23px;
             margin-top: 40px;
             border: 2px solid #7100cf;
             width: 155px;
@@ -88,11 +102,11 @@
             border-radius: 5px;
         }
 
-        .btn2{
+        .btn2 {
             margin-left: 85px
         }
 
-        #button:hover {
+        #button1:hover, #button2:hover {
             color: white;
             background-color: black;
         }
@@ -100,11 +114,13 @@
 </head>
 <body>
 <div class="box">
-    <h2>Random Password Generator</h2>
+    <h2>랜덤 비밀번호 생성기</h2>
     <label for="password"></label><input type="text" name="" placeholder="Create password" id="password" readonly>
     <table>
-        <th><div id="button" class="btn1"onclick="genPassword()">Generate</div></th>
-        <th><a  id="button" class="btn2" onclick="copyPassword()">Copy</a></th>
+        <th>
+            <div id="button1" class="btn1" onclick="genPassword()">Generate</div>
+        </th>
+        <th><a id="button2" class="btn2" onclick="copyPassword()">Copy</a></th>
     </table>
 </div>
 </body>
